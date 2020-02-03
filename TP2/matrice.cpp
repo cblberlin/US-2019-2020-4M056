@@ -85,7 +85,9 @@ MatrixDouble crochet_lie(const MatrixDouble & A, const MatrixDouble & B){
 
 // 2.9
 pair<double, double> f(const MatrixDouble & X, const MatrixDouble & Y){
-	//MatrixDouble M_A;
+	MatrixDouble M_A(X.rows(), X.cols());
+	MatrixDouble M_B(X.rows(), X.cols());
+	
 }
 
 int main(){
