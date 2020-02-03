@@ -27,7 +27,7 @@ MatrixDouble puissance(const MatrixDouble & M, int n){
 			return M*N;
 		}
 	}
-	
+// 2.3	
 MatrixDouble puissanceB(const MatrixDouble M, int n){
 		if(n==0){
 			return MatrixDouble::Identity(M.rows(),M.cols());
@@ -41,7 +41,7 @@ MatrixDouble puissanceB(const MatrixDouble M, int n){
 			return M*N;
 		}
 	}
-
+// 2.4
 MatrixDouble puissance2(const MatrixDouble & M, int n){
 	if(n == 0){
 		return MatrixDouble::Identity(M.rows(), M.cols());
@@ -90,8 +90,10 @@ int main(){
 	cout << "M est: \n" << M << "\n\n";
 	
 	puissance2(M,1000);
-	cout << "M puissance 1000 " << endl << M <<endl;
+	cout << "M puissance 1000: \n" << endl << puissance2(M, 1000) <<endl;
 	
+
+
 	return 0;
 }
 
