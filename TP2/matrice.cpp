@@ -7,7 +7,7 @@
 #include <Eigen/Sparse>
 #include <chrono>
 #include <Eigen/Eigenvalues>
-//#include <unsupported/Eigen/MatrixFuntions>
+#include <Eigen/MatrixFuntions>
 
 using namespace Eigen;
 using namespace std;
@@ -87,8 +87,19 @@ MatrixDouble crochet_lie(const MatrixDouble & A, const MatrixDouble & B){
 pair<double, double> f(const MatrixDouble & X, const MatrixDouble & Y){
 	MatrixDouble M_A(X.rows(), X.cols());
 	MatrixDouble M_B(X.rows(), X.cols());
-	
+	MatrixDouble somme(X.rows(), X.cols());
+	MatrixDouble produit(X.rows(), X.cols());
+	somme = M_A + M_B;
+	produit = M_A.exp()*M_B.exp();
+	M_A = produit - somme.exp();
+	M_B = produit - (somme + 0.5*crochet_lie(X,Y)).exp();
+	pair<double, double> result;
+	result.fisrt = M_A.norm();
+	result.second = M_B.norm();
+	return result;
 }
+
+
 
 int main(){
 	int n = 10000;
@@ -157,8 +168,17 @@ int main(){
 	chrono::duration<double> diff3 = t6 - t5;
 	cout << "Pour calculer M puissance 10000 en utilisant puissance_sparse ça prend: \n" << endl << diff3.count() << "s."<<endl;
 	
-	
-	
+	//2.10
+	mt19937 G(time(NULL));
+	uniform_real_distribution<double> Loi(-100,100);
+	const int nb_simulation = 1000;
+	double s_x = 0.0;
+	double s_y = 0.0;
+	pair<double, double> norms;
+	//Initialisation
+	MatrixDouble::Zero(3,3);
+	MatrixDouble::Zero(3,3);
+
 	return 0;
 }
 
