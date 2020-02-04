@@ -9,7 +9,7 @@
 #include <Eigen/Eigenvalues>
 // sous Mac Os
 #include </usr/local/include/eigen3/unsupported/Eigen/MatrixFunctions>
-//sous Linux
+// sous Linux
 // #include <usr/include/eigen3/unsupported/Eigen/MatrixFunctions>
 using namespace Eigen;
 using namespace std;
