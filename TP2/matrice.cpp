@@ -7,8 +7,10 @@
 #include <Eigen/Sparse>
 #include <chrono>
 #include <Eigen/Eigenvalues>
-#include </usr/include/eigen3/unsupported/Eigen/MatrixFunctions>
-
+// sous Mac Os
+#include </usr/local/include/eigen3/unsupported/Eigen/MatrixFunctions>
+//sous Linux
+// #include <usr/include/eigen3/unsupported/Eigen/MatrixFunctions>
 using namespace Eigen;
 using namespace std;
 
@@ -97,6 +99,28 @@ pair<double, double> f(const MatrixDouble & X, const MatrixDouble & Y){
 	result.first = M_A.norm();
 	result.second = M_B.norm();
 	return result;
+}
+
+// remplir MatrixDouble GOE
+MatrixDouble remplir_matrice(MatrixDouble & M, double s1, double s2){
+	int n = M.rows();
+	int m = M.cols();
+	mt19937 G(time(NULL));
+	normal_distribution<double> Loi_normale_1(0, s1);
+	normal_distribution<double> Loi_normale_2(0, s2);
+	if(n != m){
+		cout << "La matrice n'est pas carrée." << endl;
+	}
+	else{
+		for(int j=0; j<n; ++j){
+			M(j,j) = Loi_normale_1(G);
+			for(int k=j+1; k<m; ++k){
+				M(j,k) = Loi_normale_2(G);
+				M(k,j) = M(j,k);
+			}
+		}
+	}
+	return M;
 }
 
 
@@ -198,25 +222,37 @@ int main(){
 	cout << "moyenne de M_B est: " << s_y/double(nb_simulation) <<endl;
 
 	//2.11
-	//créer une histogramme
-	const int M = 20;
-	vector<double> hist(M,0);
-	//loi sur le diag et hor diag
-	normal_distribution<double> Loi1(0,1);
-	normal_distribution<double> Loi2(0,2);
-	//GOE, calculer les valeurs propres
-	MatrixDouble GOE(150, 150);
-	for(int i = 0, i < 150; ++i){
-		GOE(i,i) = Loi1(G);
-		for(int j = i + 1, j < 150; ++j){
-			GOE(i,j) = Loi2(G);
-			GOE(j,i) = GOE(i,j);
+	normal_distribution<double> Loi_normale_1(0,1); // loi sur le diagonale
+	normal_distribution<double> Loi_normale_2(0,2); // loi hors le diagonale
+
+	int nb_divisions = 50; // nombre de divisions du histogramme
+	int nb_simul = 50; // nombre de simulation
+	int n2 = 150; // taille de matrice
+	vector<double> histogramme(nb_divisions, 0); // créer un histogramme
+	MatrixDouble GOE(n2, n2); // créer une matrice double vide
+
+	double s1 = 1.;
+	double s2 = 2.;
+
+	// remplir la matrice
+	for(int i=0; i<nb_simul; ++i){
+		GOE = remplir_matrice(GOE, s1, s2);
+		// calculer les valeurs propres
+		EigenSolver<MatrixDouble> Solver(GOE);
+		// remplir histogramme
+		double lambda_normalise;
+		for(int i = 0; i < n2; ++i){
+			lambda_normalise	= Solver.eigenvalues()[i].real()/(2.*sqrt(n2));
+			int k = floor((lambda_normalise - (-3.)) * nb_divisions / 6.);
+			if( (k >= 0) && (k < nb_divisions)){ // k est entre 0 et nombre de divisions
+				histogramme[k] += 1./double(nb_simulation * n2);
+			}
 		}
 	}
-	EigenSolver<MatrixDouble> Solver(M);
 
-	
-
-
+	ofstream o2("eigenvalues.dat");
+	for(int i = 0; i< nb_divisions; ++i){
+			o2 << -3+(2*i+1)*(3-(-3))/(2.*nb_divisions) << "\t" << histogramme[i] << std::endl;
+	}
 	return 0;
 }

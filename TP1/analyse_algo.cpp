@@ -24,9 +24,9 @@ int main() {
 	int n = 0;
 	vector<Fiche> vdata;
 	Fiche individu;
-	while (file >> individu.prenom 
-		        >> individu.ville 
-		        >> individu.age 
+	while (file >> individu.prenom
+		        >> individu.ville
+		        >> individu.age
 		        >> individu.temps){
 		++n;
 		vdata.push_back(individu);
@@ -70,7 +70,7 @@ int main() {
 	variance /= double(n);
 	variance -= moyenne*moyenne;
 	cout << "(e) L'age moyenne est " << moyenne << " ans.\n\n"
-	     << "L'écart-type est " << sqrt(variance) << " ans.\n\n"; 
+	     << "L'écart-type est " << sqrt(variance) << " ans.\n\n";
 
 
 	//1.3.2.f
@@ -105,13 +105,13 @@ int main() {
 		    	  << endl;
 		}
 	};
-    for_each(vdata.begin(), vdata.end(), is_from_Toulouse);
-    file2.close();
+  for_each(vdata.begin(), vdata.end(), is_from_Toulouse);
+  file2.close();
 	cout << "(g) Le fichier toulousains_algo est bien généré.\n\n";
 
 
-    //1.3.2.h
-    double age_moyenne_toulousain = accumulate(vdata.begin(), vdata.end(), 0., [] (double a, Fiche f) -> double {return a + ((f.ville == "Toulouse")?f.age: 0.);});
+  //1.3.2.h
+  double age_moyenne_toulousain = accumulate(vdata.begin(), vdata.end(), 0., [] (double a, Fiche f) -> double {return a + ((f.ville == "Toulouse")?f.age: 0.);});
 
 	double temps_moyenne_toulousain = accumulate(vdata.begin(), vdata.end(), 0., [] (double t, Fiche f) -> double {return t + ((f.ville == "Toulouse")?f.temps: 0.);});
 
@@ -132,7 +132,7 @@ int main() {
 	set<string> Villes;
 	for_each(vdata.begin(), vdata.end(),[&Villes](Fiche f) {Villes.insert(f.ville);});
 
-	cout << "(i) Les villes sont: " << endl; 
+	cout << "(i) Les villes sont: " << endl;
 	for_each(Villes.begin(), Villes.end(), [] (string nom) {cout << nom << endl;});
 
 	//1.3.3
@@ -153,5 +153,3 @@ int main() {
 
 	return 0;
 }
-
-
