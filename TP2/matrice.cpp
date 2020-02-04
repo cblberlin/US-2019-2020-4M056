@@ -252,7 +252,7 @@ int main(){
 
 	ofstream o2("eigenvalues.dat");
 	for(int i = 0; i< nb_divisions; ++i){
-			o2 << -3+(2*i+1)*(3-(-3))/(2.*nb_divisions) << "\t" << histogramme[i] << std::endl;
+			o2 << -3+(2*i+1)*(3-(-3))/(2.*nb_divisions) << "\t" << histogramme[i] << endl;
 	}
 	return 0;
 }
