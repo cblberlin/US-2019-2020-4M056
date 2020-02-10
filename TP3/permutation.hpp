@@ -14,42 +14,47 @@ private:
   // Constructeurs prenant en argument
   // taille de la permutation
   unsigned n;
-  // un vecteur representant la seconde ligne du tableau
   vector<unsigned> images;
-  
-  // mutata the element of images
+  // 3.4 mutate the element of images
   unsigned & operator[](unsigned i);
-  // extend n par m
+  // extend n to m (m is greater than n)
   Permutation extend(unsigned m) const;
-  
+
 public:
+  // constructor empty
+  Permutation() = default;
+  // return identity permutation
+  Permutation(unsigned);
+  // return permutation from a vector defined
+  Permutation(const vector <unsigned> &);
+  
   // return size of permutation
   /*unsigned size() const{
     return n;
   }*/
-  // return size of permutation
+  // up there works as well
+  // 3.4 return size of permutation
   unsigned size() const;
-  
-  // mutate the value of images
-  unsigned & operator=(unsigned i);
-  
-  // return identity permutation
-  Permutation(unsigned _n);
-  
-  // return permutation from a vector defined
-  Permutation(const vector <unsigned> &v);
-  
-  // acces by index
+
+  // acces by index i
   unsigned operator[](unsigned i) const;
-  
-  // print the permutation at terminal
+
+  // 3.6 operator multiplication of 2 permutaions
+  friend Permutation operator*(const Permutation &, const Permutation &);
+
+  // 3.7 print the permutation at terminal
   friend ostream & operator<<(ostream &, const Permutation &);
-  
-  
-  
+
+  // 3.8 list of fixed points
+  list<unsigned> fixed_points_list() const;
+  // vector of fixed points
+  vector<unsigned> fixed_points_vector() const;
+  // 3.9 inverse of permutaion
+  Permutation inverse() const;
+
 };
 
-  
+
 
 
 
