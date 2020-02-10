@@ -7,10 +7,10 @@
 #include <Eigen/Sparse>
 #include <chrono>
 #include <Eigen/Eigenvalues>
-// sous Mac Os
-#include </usr/local/include/eigen3/unsupported/Eigen/MatrixFunctions>
-// sous Linux
-// #include <usr/include/eigen3/unsupported/Eigen/MatrixFunctions>
+#include <unsupported/Eigen/MatrixFunctions>
+
+// it seems like the problem has been fixed by developper, we can just put #include <unsupported/Eigen/MatrixFunctions>
+// otherwise we need to write #include <usr/local/include/eigen3/unsupported/Eigen/MatrixFunctions>
 using namespace Eigen;
 using namespace std;
 
