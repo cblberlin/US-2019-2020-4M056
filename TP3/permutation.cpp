@@ -6,7 +6,7 @@
 
 using namespace std;
 
-// 3.3 create a identity permutaion and a permutation from a vector
+// 3.3 create a identity permutaion and a permutation from a vector and from a flux
 Permutation::Permutation(unsigned _n):
 	n(_n), images(_n)
 {
@@ -23,15 +23,24 @@ Permutation::Permutation(const vector <unsigned> &v):
 	}
 }
 
+Permutation::Permutation(istream & flux){
+	flux >> n;
+	images.resize(n);
+	for(unsigned i = 0; i < n; ++i){
+		flux >> images[i];
+	}
+}
+
+
 // 3.4 access size and access and modifier of i-th element of permutaion
 unsigned Permutation::size() const {
 	return n;
 }
-
+// accessor of i-th element of images
 unsigned Permutation::operator[](unsigned i) const {
 	return images[i];
 }
-
+// modifier of i-th element of images
 unsigned & Permutation::operator[](unsigned i) {
 	return images[i];
 }
@@ -57,13 +66,12 @@ Permutation operator*(const Permutation & p1, const Permutation & p2){
 		unsigned m = max(p1.size(), p2.size());
 		return p1.extend(m) * p2.extend(m);
 	}
-	else{
-		Permutation p(p1.size());
-		for(unsigned i = 0; i < p1.size(); ++i){
-			p[i] = p1[p2[i]];
-		}
-		return p;
+
+	Permutation p(p1.size());
+	for(unsigned i = 0; i < p1.size(); ++i){
+		p[i] = p1[p2[i]];
 	}
+	return p;
 }
 
 // 3.7 read the permutation and print it in terminal
@@ -99,6 +107,20 @@ vector<unsigned> Permutation::fixed_points_vector() const{
 
 // 3.9 inverse of Permutation
 Permutation Permutation::inverse() const{
-	Permutation i(n);
-	return i;
+	Permutation inv(n);
+	for(unsigned i = 0; i < size(); ++i){
+		inv[images[i]] = i;
+	}
+	return inv;
+}
+
+// 3.10 constructor of cycle from a list copied from elem
+Cycle::Cycle(list <unsigned> l):
+	elem(l)
+{
+
+}
+
+unsigned Cycle::order() const{
+	return elem.size();
 }

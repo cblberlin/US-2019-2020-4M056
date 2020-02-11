@@ -27,7 +27,8 @@ public:
   Permutation(unsigned);
   // return permutation from a vector defined
   Permutation(const vector <unsigned> &);
-  
+  // from a file
+  Permutation(istream &);
   // return size of permutation
   /*unsigned size() const{
     return n;
@@ -37,7 +38,7 @@ public:
   unsigned size() const;
 
   // acces by index i
-  unsigned operator[](unsigned i) const;
+  unsigned operator[](unsigned) const;
 
   // 3.6 operator multiplication of 2 permutaions
   friend Permutation operator*(const Permutation &, const Permutation &);
@@ -51,10 +52,17 @@ public:
   vector<unsigned> fixed_points_vector() const;
   // 3.9 inverse of permutaion
   Permutation inverse() const;
+};
+// 3.10 constructor of cycle with elem as private member and public constructor
+// and order
+class Cycle{
+private:
+  list <unsigned> elem;
+public:
+  Cycle(list <unsigned>);
+  unsigned order() const;
 
 };
-
-
 
 
 
