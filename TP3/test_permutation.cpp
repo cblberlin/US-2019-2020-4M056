@@ -51,6 +51,7 @@ int main(){
   cout << "order of c is: " <<c.order() << endl;
 
   cout << "test gcd " << gcd(30, 7) << endl;
+
   // cout << s << endl;
 /*
   Permutation u = s*t.inverse();
