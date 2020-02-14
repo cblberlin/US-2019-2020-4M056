@@ -2,17 +2,13 @@
 #ifndef ARITHMETIC
 #define ARITHMETIC
 
-#incude <>
+#include <list>
 
+unsigned gcd(unsigned a, unsigned b);
+unsigned gcd(std::list<unsigned> l);
 
-
-
-
-
-
-
-
-
+unsigned lcm(unsigned a, unsigned b);
+unsigned lcm(std::list<unsigned> l);
 
 
 

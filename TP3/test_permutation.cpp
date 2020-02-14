@@ -1,4 +1,5 @@
 #include "permutation.hpp"
+#include "arithm.hpp"
 #include <iostream>
 #include <fstream>
 #include <algorithm>
@@ -45,10 +46,16 @@ int main(){
   Permutation t(fichier_t);
   fichier_s.close();
   fichier_t.close();
+
+  Cycle c(list <unsigned> {1,2,3});
+  cout << "order of c is: " <<c.order() << endl;
+
+  cout << "test gcd " << gcd(30, 7) << endl;
   // cout << s << endl;
 /*
   Permutation u = s*t.inverse();
   cout << "L'ordre de la permutaion s*t^-1 est égal à " << u.order() << endl;
+
 
   list<Cycle> l = u.cycles();
   cout << "Cette permutaion a " << l.size() << "cycles, dont le plus grand a pour longeur "
