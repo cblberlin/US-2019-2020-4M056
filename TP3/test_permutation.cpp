@@ -50,7 +50,13 @@ int main(){
   Cycle c(list <unsigned> {1,2,3});
   cout << "order of c is: " <<c.order() << endl;
 
-  cout << "test gcd " << gcd(30, 7) << endl;
+  cout << "test gcd of 2 unsigned: " << gcd(30, 6) << endl;
+
+  cout << "test gcd of a list: " << gcd(list <unsigned> {3,6,9}) << endl;
+
+  cout << "test lcm of 2 unsigned: " << lcm(5, 6) << endl;
+
+  cout << "test lcm of a list: " << lcm(list <unsigned> {3,6,9}) << endl;
 
   // cout << s << endl;
 /*
