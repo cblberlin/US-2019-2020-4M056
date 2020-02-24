@@ -58,6 +58,7 @@ int main(){
 
   cout << "test lcm of a list: " << lcm(list <unsigned> {3,6,9}) << endl;
 
+  cout << "test cycles of permutaion: " << v.cycles() << endl;
   // cout << s << endl;
 /*
   Permutation u = s*t.inverse();

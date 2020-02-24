@@ -9,6 +9,9 @@
 
 using namespace std;
 
+class Permutation;
+class Cycle;
+
 class Permutation{
 private:
   // Constructeurs prenant en argument
@@ -27,7 +30,7 @@ public:
   Permutation(unsigned);
   // return permutation from a vector defined
   Permutation(const vector <unsigned> &);
-  // from a file
+  // 3.17 from a file
   Permutation(istream &);
   // return size of permutation
   /*unsigned size() const{
@@ -52,20 +55,21 @@ public:
   vector<unsigned> fixed_points_vector() const;
   // 3.9 inverse of permutaion
   Permutation inverse() const;
+  // 3.12 cycles
+  list <Cycle> cycles() const;
+
+  template <typename T> 
 };
 // 3.10 constructor of cycle with elem as private member and public constructor
 // and order
+
 class Cycle{
 private:
   list <unsigned> elem;
 public:
   Cycle(list <unsigned>);
   unsigned order() const;
-
 };
-
-
-
 
 
 #endif

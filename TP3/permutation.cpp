@@ -124,3 +124,30 @@ Cycle::Cycle(list <unsigned> l):
 unsigned Cycle::order() const{
 	return elem.size();
 }
+
+list Permutation::cycles() const{
+
+}
+
+
+// 3.12 cycles
+list <Cycle> Permutation::cycles() const{
+	list <Cycle> l;
+	set <unsigned> s;
+	for(unsigned i = 0; i < n; ++i){
+		s.insert(i);
+	}
+	while(!s.empty()){
+		auto x = s.begin();
+		unsigned x_ = *x;
+		s.erase(x_);
+		list <unsigned> c = {x_};
+		unsigned sigma_x = images[x_];
+		while(sigma_x != x_){
+			s.erase(sigma_x);
+			c.push_back(sigma_x);
+			sigma_x = images[sigma_x];
+		}
+		l.push_back(Cycle(c));
+	}
+}
