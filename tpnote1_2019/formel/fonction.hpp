@@ -9,9 +9,9 @@ private:
   std::string fct;
   std::string drv;
 public:
-  Fonction(std::string nom): fct(nom + "(.)"), drv(nom + "'(.)") {}
+  Fonction(std::string);//: fct(nom + "(.)"), drv(nom + "'(.)") {}
 
-  Fonction(std::string nom, std::string derivee): fct(nom+"(.)"), drv(derivee+"(.)") {}
+  Fonction(std::string nom, std::string derivee);//: fct(nom+"(.)"), drv(derivee+"(.)") {}
 
   Fonction(unsigned n);
 

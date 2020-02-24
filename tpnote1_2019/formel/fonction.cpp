@@ -7,6 +7,16 @@ std::ostream & operator << (std::ostream & out, const Fonction & f) {
   return out;
 }
 
+Fonction::Fonction(std::string nom){
+  fct = nom + "(.)";
+  drv = nom + "'(.)";
+}
+
+Fonction::Fonction(std::string nom, std::string derivee){
+  fct = nom + "(.)";
+  drv = derivee + "(.)";
+}
+
 Fonction::Fonction(unsigned n){
   if(n == 0){
     fct = "1";
